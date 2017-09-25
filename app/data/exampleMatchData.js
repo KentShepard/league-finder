@@ -1,4 +1,4 @@
-{
+window.exampleMatchData = {
     "matches": [
         {
             "platformId": "NA1",

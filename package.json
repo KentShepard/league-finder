@@ -11,11 +11,12 @@
     "build:watch": "babel . --watch --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "bootstrap": "^4.0.0-alpha.2",
+    "express": "^4.13.4",
     "jquery": "^2.2.1",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "express": "^4.13.4"
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
