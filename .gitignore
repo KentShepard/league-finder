@@ -1,0 +1,9 @@
+## NPM ##
+node_modules/
+
+## Compiled files ##
+compiled/
+
+## API keys ##
+app/config/riot.js
+compiled/config/riot.js
