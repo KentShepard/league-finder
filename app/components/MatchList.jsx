@@ -1,10 +1,9 @@
-var MatchList = ({matches}) =>
-
+var MatchList = ({matches}) => (
   <div className="match-list">
   {matches.map((match) =>
     <MatchListEntry key={match.gameId} />
   )}
-  </div>;
-
+  </div>
+)
 
 window.MatchList = MatchList;

@@ -1,7 +1,5 @@
-var Summoner = () => {
-  <div>
-    <div></div>
-  </div>
-};
+var Summoner = ({summoner}) => (
+  <div>{summoner}</div>
+);
 
 window.Summoner = Summoner;

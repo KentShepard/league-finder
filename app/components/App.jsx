@@ -15,17 +15,19 @@ class App extends React.Component {
     }
 
     serverRequest(object, (err, data) => {
-      if (err) {
-        this.state.currentSummoner = err.status.message;
+      if (data.status) {
+        // console.log('inside err', err);
+        this.setState({currentSummoner: data.status.message});
       } else {
-        var parsed = JSON.parse(data);
-        this.state.currentSummoner = parsed.name;
+        // var parsed = JSON.parse(data);
+        console.log('inside else', data);
+        this.setState({currentSummoner: data.name});
       }
     })
   }
 
   nameChange(name) {
-    this.state.name = name;
+    this.setState({name: name});
   }
 
   render() {
@@ -35,6 +37,7 @@ class App extends React.Component {
         <Search searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
       </div>
       <div>
+        <Summoner summoner={this.state.currentSummoner}/>
       </div>
     </div>
     )
