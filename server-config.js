@@ -25,6 +25,7 @@ app.get('/summoner', function(req, res) {
 
       request(rankedUrl, function(error, response, body) {
         var parsedRanked = JSON.parse(body);
+        console.log(parsedRanked)
         parsedRanked.forEach((rankedQ) => {
           if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
             searched[summonerName].soloQ = rankedQ
@@ -32,6 +33,7 @@ app.get('/summoner', function(req, res) {
             searched[summonerName].flexQ = rankedQ
           }
         })
+        console.log(searched[summonerName])
         res.send(searched[summonerName]);
       });
     });

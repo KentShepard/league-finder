@@ -14,10 +14,10 @@ var Summoner = ({accountInfo, soloQ, flexQ}) => (
       <tr>
         <td>{accountInfo.name}</td>
         <td>{accountInfo.summonerLevel}</td>
-        <td>{`${soloQ.tier} ${soloQ.rank}`}</td>
-        <td>{`${soloQ.wins}-${soloQ.losses} (${(soloQ.wins / (soloQ.wins + soloQ.losses)).toFixed(4) * 100}%)`}</td>
-        <td>{`${flexQ.tier} ${flexQ.rank}`}</td>
-        <td>{`${flexQ.wins}-${flexQ.losses} (${(flexQ.wins / (flexQ.wins + flexQ.losses)).toFixed(4) * 100}%)`}</td>
+        <td>{soloQ !== undefined ? `${soloQ.tier} ${soloQ.rank}` : 'Unranked'}</td>
+        <td>{soloQ !== undefined ? `${soloQ.wins}-${soloQ.losses} (${(soloQ.wins / (soloQ.wins + soloQ.losses)).toFixed(4) * 100}%)` : 'Unranked'}</td>
+        <td>{flexQ !== undefined ? `${flexQ.tier} ${flexQ.rank}` : 'Unranked'}</td>
+        <td>{flexQ !== undefined ? `${flexQ.wins}-${flexQ.losses} (${(flexQ.wins / (flexQ.wins + flexQ.losses)).toFixed(4) * 100}%)` : 'Unranked'}</td>
       </tr>
     </tbody>
   </table>
