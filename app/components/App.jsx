@@ -4,7 +4,8 @@ class App extends React.Component {
 
     this.state = {
       matchList: window.exampleMatchData.matches,
-      name: ''
+      name: '',
+      currentSummoner: ''
     };
   }
 
@@ -13,8 +14,13 @@ class App extends React.Component {
       name: this.state.name,
     }
 
-    serverRequest(object, (data) => {
-      console.log(data);
+    serverRequest(object, (err, data) => {
+      if (err) {
+        this.state.currentSummoner = err.status.message;
+      } else {
+        var parsed = JSON.parse(data);
+        this.state.currentSummoner = parsed.name;
+      }
     })
   }
 
@@ -26,10 +32,9 @@ class App extends React.Component {
     return (
     <div>
       <div>
-        <Search searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)}/>
+        <Search searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
       </div>
       <div>
-
       </div>
     </div>
     )

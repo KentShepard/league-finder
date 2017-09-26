@@ -4,10 +4,10 @@ var serverRequest = ({name}, callback) => {
     data: {name: name},
     dataType: 'json',
     success: function(data) {
-      callback(data);
+      callback(null, data);
     },
     error: function(err) {
-      console.log(err);
+      callback(err);
     },
     type: 'GET'
   })
