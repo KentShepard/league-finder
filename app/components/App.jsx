@@ -4,30 +4,33 @@ class App extends React.Component {
 
     this.state = {
       matchList: window.exampleMatchData.matches,
-      name: '',
-      currentSummoner: ''
+      searchBar: 'ArkShepdog',
+      accountInfo: {},
+      soloQ: {},
+      flexQ: {}
     };
   }
 
   searchName() {
     var object = {
-      name: this.state.name,
+      name: this.state.searchBar,
     }
 
     serverRequest(object, (err, data) => {
-      if (data.status) {
-        // console.log('inside err', err);
-        this.setState({currentSummoner: data.status.message});
+      if (err) {
+        this.setState({currentSummoner: ''});
       } else {
-        // var parsed = JSON.parse(data);
-        console.log('inside else', data);
-        this.setState({currentSummoner: data.name});
+        this.setState({
+          accountInfo: data.accountInfo,
+          soloQ: data.soloQ,
+          flexQ: data.flexQ
+        });
       }
     })
   }
 
   nameChange(name) {
-    this.setState({name: name});
+    this.setState({searchBar: name});
   }
 
   render() {
@@ -37,7 +40,7 @@ class App extends React.Component {
         <Search searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
       </div>
       <div>
-        <Summoner summoner={this.state.currentSummoner}/>
+        <Summoner accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
     </div>
     )
