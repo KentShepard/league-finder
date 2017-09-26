@@ -7,8 +7,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel . --out-dir public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
-    "build:watch": "babel . --watch --out-dir public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline"
+    "build": "babel . --out-dir public/compiled --presets=es2015,react --ignore=node_modules,compiled,bower_components --source-maps inline",
+    "build:watch": "babel . --watch --out-dir public/compiled --presets=es2015,react --ignore=node_modules,compiled,bower_components --source-maps inline"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
