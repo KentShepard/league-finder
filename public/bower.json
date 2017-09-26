@@ -1,0 +1,22 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/KentShepard/league-finder",
+  "authors": [
+    "Kent Shepard <kentshepard7@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "react": "^15.6.1",
+    "bootstrap": "^3.3.7"
+  }
+}

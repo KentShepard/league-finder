@@ -1,7 +1,11 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-  };
+
+    this.state = {
+      matchList: window.exampleMatchData.matches
+    };
+  }
 
   render() {
     return (
@@ -10,7 +14,7 @@ class App extends React.Component {
         <Search/>
       </div>
       <div>
-
+        <MatchList matches={this.state.matchList}/>
       </div>
     </div>
     )
