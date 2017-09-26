@@ -1,5 +1,5 @@
-var Summoner = ({accountInfo, soloQ, flexQ}) => {
-  if (accountInfo.name) {
+var Summoner = ({summonerFound, accountInfo, soloQ, flexQ}) => {
+  if (summonerFound && accountInfo.name) {
     return (
       <table className="table table-striped table-hover ">
         <thead>
@@ -23,6 +23,10 @@ var Summoner = ({accountInfo, soloQ, flexQ}) => {
           </tr>
         </tbody>
       </table>
+    )
+  } else if (!summonerFound) {
+    return (
+      <div>There was an error! Make sure the summoner name is spelled correctly.</div>
     )
   } else {
     return (

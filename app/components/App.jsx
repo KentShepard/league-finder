@@ -7,7 +7,8 @@ class App extends React.Component {
       searchBar: 'ArkShepdog',
       accountInfo: {},
       soloQ: {},
-      flexQ: {}
+      flexQ: {},
+      summonerFound: true
     };
   }
 
@@ -19,9 +20,13 @@ class App extends React.Component {
 
     serverRequest(object, (err, data) => {
       if (err) {
-        this.setState({searchBar: ''});
+        this.setState({
+          summonerFound: false,
+          searchBar: ''
+        });
       } else {
         this.setState({
+          summonerFound: true,
           accountInfo: data.accountInfo,
           soloQ: data.soloQ,
           flexQ: data.flexQ,
@@ -42,7 +47,7 @@ class App extends React.Component {
         <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
       </div>
       <div>
-        <Summoner accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
+        <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
 
