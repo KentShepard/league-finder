@@ -1,6 +1,6 @@
-var serverRequest = ({name}, callback) => {
+var serverRequest = ({name, endpoint}, callback) => {
   $.ajax({
-    url: 'http://127.0.0.1:3000/summoner',
+    url: `http://127.0.0.1:3000/${endpoint}`,
     data: {name: name},
     dataType: 'json',
     success: function(data) {

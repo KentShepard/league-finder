@@ -14,6 +14,7 @@ class App extends React.Component {
   searchName() {
     var object = {
       name: this.state.searchBar,
+      endpoint: 'summoner'
     }
 
     serverRequest(object, (err, data) => {

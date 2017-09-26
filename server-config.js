@@ -18,6 +18,7 @@ app.get('/summoner', function(req, res) {
     var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
 
     request(summonerUrl, function(error, response, body) {
+
       var parsedInfo = JSON.parse(body);
       searched[summonerName] = {};
       searched[summonerName].accountInfo = parsedInfo;
@@ -25,7 +26,6 @@ app.get('/summoner', function(req, res) {
 
       request(rankedUrl, function(error, response, body) {
         var parsedRanked = JSON.parse(body);
-        console.log(parsedRanked)
         parsedRanked.forEach((rankedQ) => {
           if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
             searched[summonerName].soloQ = rankedQ
