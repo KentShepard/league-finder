@@ -1,6 +1,9 @@
 ## NPM ##
 node_modules/
 
+## BOWER ##
+public/bower_components
+
 ## Compiled files ##
 compiled/
 
