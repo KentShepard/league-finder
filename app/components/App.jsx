@@ -10,17 +10,16 @@ class App extends React.Component {
 
   searchName() {
     var object = {
-      query: this.state.name,
+      name: this.state.name,
     }
-    console.log(object);
-    // serverRequest(object, (data) => {
-    //   console.log(data);
-    // })
+
+    serverRequest(object, (data) => {
+      console.log(data);
+    })
   }
 
   nameChange(name) {
     this.state.name = name;
-    console.log(this.state.name);
   }
 
   render() {
