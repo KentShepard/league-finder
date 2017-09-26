@@ -26,15 +26,19 @@ app.get('/summoner', function(req, res) {
 
         request(rankedUrl, function(error, response, body) {
           var parsedRanked = JSON.parse(body);
-          parsedRanked.forEach((rankedQ) => {
-            if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
-              searched[summonerName].soloQ = rankedQ
-            } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
-              searched[summonerName].flexQ = rankedQ
-            }
-          })
-          console.log(searched[summonerName])
-          res.send(searched[summonerName]);
+          console.log(parsedRanked)
+          if (parsedRanked.length) {
+            parsedRanked.forEach((rankedQ) => {
+              if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
+                searched[summonerName].soloQ = rankedQ;
+              } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
+                searched[summonerName].flexQ = rankedQ;
+              }
+            })
+            res.send(searched[summonerName]);
+          } else {
+            res.send(searched[summonerName]);
+          }
         });
       } else {
         res.status(400).send('Error finding summoner')
