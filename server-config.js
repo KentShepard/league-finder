@@ -18,26 +18,33 @@ app.get('/summoner', function(req, res) {
     var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
 
     request(summonerUrl, function(error, response, body) {
-
       var parsedInfo = JSON.parse(body);
-      searched[summonerName] = {};
-      searched[summonerName].accountInfo = parsedInfo;
-      var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
+      if (parsedInfo.name) {
+        searched[summonerName] = {};
+        searched[summonerName].accountInfo = parsedInfo;
+        var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
 
-      request(rankedUrl, function(error, response, body) {
-        var parsedRanked = JSON.parse(body);
-        parsedRanked.forEach((rankedQ) => {
-          if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
-            searched[summonerName].soloQ = rankedQ
-          } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
-            searched[summonerName].flexQ = rankedQ
-          }
-        })
-        console.log(searched[summonerName])
-        res.send(searched[summonerName]);
-      });
+        request(rankedUrl, function(error, response, body) {
+          var parsedRanked = JSON.parse(body);
+          parsedRanked.forEach((rankedQ) => {
+            if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
+              searched[summonerName].soloQ = rankedQ
+            } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
+              searched[summonerName].flexQ = rankedQ
+            }
+          })
+          console.log(searched[summonerName])
+          res.send(searched[summonerName]);
+        });
+      } else {
+        res.status(400).send('Error finding summoner')
+      }
     });
   }
+});
+
+app.get('/matches', function(req, res) {
+
 });
 
 module.exports = app;

@@ -19,12 +19,13 @@ class App extends React.Component {
 
     serverRequest(object, (err, data) => {
       if (err) {
-        this.setState({currentSummoner: ''});
+        this.setState({searchBar: ''});
       } else {
         this.setState({
           accountInfo: data.accountInfo,
           soloQ: data.soloQ,
-          flexQ: data.flexQ
+          flexQ: data.flexQ,
+          searchBar: ''
         });
       }
     })
@@ -38,10 +39,13 @@ class App extends React.Component {
     return (
     <div>
       <div>
-        <Search searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
+        <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
       </div>
       <div>
         <Summoner accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
+      </div>
+      <div>
+
       </div>
     </div>
     )
