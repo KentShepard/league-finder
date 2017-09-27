@@ -1,7 +1,7 @@
 var express = require('express');
-var fs = require('fs');
-var Promise = require('bluebird');
-var readFile = Promise.promisify(fs.readFile);
+// var fs = require('fs');
+// var Promise = require('bluebird');
+// var readFile = Promise.promisify(fs.readFile);
 var api_key = require('./app/config/riot');
 var request = require('request')
 
@@ -47,6 +47,22 @@ app.get('/summoner', function(req, res) {
   }
 });
 
+var matchRequest = function(match) {
+  return new Promise(function(resolve, reject) {
+    var gameId = match.gameId;
+    var champId = Number(match.champion);
+    var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
+
+    request(matchUrl, function(err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+};
+
 app.get('/matches', function(req, res) {
   var summonerName = req.query.name;
   var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
@@ -61,41 +77,46 @@ app.get('/matches', function(req, res) {
     var gameStats = [];
 
     for (var i = 0; i < results.length; i++) {
-      var gameId = results[i].gameId;
-      var champId = Number(results[i].champion);
-      var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
+      var added = 0;
+      (function(count) {
 
-      request(matchUrl, function(error, response, body) {
-        var parsed = JSON.parse(body);
-        var players = parsed.participants;
-        var playerStats;
-        var stats = {};
+        var gameId = results[count].gameId;
+        var champId = Number(results[count].champion);
+        var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
 
-        var findPlayer = function(id) {
-          for (var i = 0; i < players.length; i++) {
-            if (players[i].championId === id) {
-              return players[i];
+        request(matchUrl, function(error, response, body) {
+          var parsed = JSON.parse(body);
+          var players = parsed.participants;
+          var playerStats;
+          var stats = {};
+
+          var findPlayer = function(id) {
+            for (var i = 0; i < players.length; i++) {
+              if (players[i].championId === id) {
+                return players[i];
+              }
             }
           }
-        }
 
-        var player = findPlayer(champId)
+          var player = findPlayer(champId)
 
-        for (var i = 0; i < parsed.teams.length; i++) {
-          if (player.teamId === parsed.teams[i].teamId) {
-            stats.result = parsed.teams[i].win;
+          for (var i = 0; i < parsed.teams.length; i++) {
+            if (player.teamId === parsed.teams[i].teamId) {
+              stats.result = parsed.teams[i].win;
+            }
           }
-        }
 
-        stats.kills = player.stats.kills;
-        stats.deaths = player.stats.deaths;
-        stats.assists = player.stats.assists;
-        gameStats.push(stats);
-        console.log(gameStats);
-      });
+          stats.kills = player.stats.kills;
+          stats.deaths = player.stats.deaths;
+          stats.assists = player.stats.assists;
+          results[count].stats = stats;
+          added++;
+          if (added === results.length) {
+            res.send(results);
+          }
+        })
+      }(i));
     }
-
-    res.send(gameStats);
   });
 });
 
