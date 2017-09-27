@@ -8,7 +8,8 @@ class App extends React.Component {
       accountInfo: {},
       soloQ: {},
       flexQ: {},
-      summonerFound: true
+      summonerFound: true,
+      matchesFound: false
     };
   }
 
@@ -36,6 +37,18 @@ class App extends React.Component {
     })
   }
 
+  searchMatches() {
+    this.setState({
+      matchesFound: true
+    });
+  }
+
+  hideMatches() {
+    this.setState({
+      matchesFound: false
+    });
+  }
+
   nameChange(name) {
     this.setState({searchBar: name});
   }
@@ -50,7 +63,7 @@ class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList accountInfo={this.state.accountInfo} />
+        <MatchList matchesFound={this.state.matchesFound} searchMatches={this.searchMatches.bind(this)} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
       </div>
     </div>
     )

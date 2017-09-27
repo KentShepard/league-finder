@@ -1,7 +1,11 @@
-var MatchListEntry = ({gameId}) => (
-  <div className="match-list-entry">
-    <div>{gameId}</div>
-  </div>
+var MatchListEntry = ({}) => (
+  <tbody>
+    <tr>
+      <td>Victory</td>
+      <td>Thresh</td>
+      <td>1/0/21</td>
+    </tr>
+  </tbody>
 );
 
 window.MatchListEntry = MatchListEntry;
