@@ -54,7 +54,13 @@ app.get('/matches', function(req, res) {
   var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
 
   request(matchesUrl, function(error, response, body) {
-    res.send(body);
+    var parsedMatches = JSON.parse(body);
+    console.log(parsedMatches)
+    var results = [];
+    for (var i = 0; i < 5; i++) {
+      results.push(parsedMatches.matches[i]);
+    }
+    res.send(results);
   });
 });
 

@@ -1,4 +1,4 @@
-var MatchList = ({matchesFound, searchMatchHistory, hideMatches, accountInfo}) => {
+var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, accountInfo}) => {
   if (matchesFound) {
     return(
       <div>
@@ -11,6 +11,7 @@ var MatchList = ({matchesFound, searchMatchHistory, hideMatches, accountInfo}) =
               <th>Queue Type</th>
               <th>Win/Loss</th>
               <th>Champion Played</th>
+              <th>Role</th>
               <th>K/D/A</th>
             </tr>
           </thead>

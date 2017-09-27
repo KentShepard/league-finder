@@ -23,6 +23,8 @@ class App extends React.Component {
       if (err) {
         this.setState({
           summonerFound: false,
+          matchesFound: false,
+          accountInfo: {},
           searchBar: ''
         });
       } else {
@@ -51,13 +53,15 @@ class App extends React.Component {
       } else {
         this.setState({
           matchesFound: true,
-          matchList: data.matches
+          matchList: data
         });
       }
     })
   }
 
-  searchMatch
+  searchMatch() {
+
+  }
 
   hideMatches() {
     this.setState({
@@ -79,7 +83,7 @@ class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
+        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
       </div>
     </div>
     )
