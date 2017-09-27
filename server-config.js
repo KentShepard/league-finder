@@ -72,7 +72,7 @@ app.get('/matches', function(req, res) {
     request(matchesUrl, function(error, response, body) {
       var parsedMatches = JSON.parse(body);
       var results = [];
-      for (var i = 0; i < 20; i++) {
+      for (var i = 0; i < 10; i++) {
         results.push(parsedMatches.matches[i]);
       }
 
@@ -115,7 +115,6 @@ app.get('/matches', function(req, res) {
             added++;
             if (added === results.length) {
               searched[summonerName].gameStats = results;
-              console.log(searched[summonerName]);
               res.send(results);
             }
           })
