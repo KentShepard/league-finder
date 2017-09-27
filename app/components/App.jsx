@@ -9,8 +9,7 @@ class App extends React.Component {
       soloQ: {},
       flexQ: {},
       summonerFound: true,
-      matchesFound: false,
-      gameStats: {}
+      matchesFound: false
     };
   }
 
@@ -34,7 +33,8 @@ class App extends React.Component {
           accountInfo: data.accountInfo,
           soloQ: data.soloQ,
           flexQ: data.flexQ,
-          searchBar: ''
+          searchBar: '',
+          matchesFound: false
         });
       }
     })

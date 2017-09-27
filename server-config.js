@@ -66,58 +66,63 @@ var matchRequest = function(match) {
 app.get('/matches', function(req, res) {
   var summonerName = req.query.name;
   var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
+  if (searched[summonerName].gameStats) {
+    res.send(searched[summonerName].gameStats)
+  } else {
+    request(matchesUrl, function(error, response, body) {
+      var parsedMatches = JSON.parse(body);
+      var results = [];
+      for (var i = 0; i < 20; i++) {
+        results.push(parsedMatches.matches[i]);
+      }
 
-  request(matchesUrl, function(error, response, body) {
-    var parsedMatches = JSON.parse(body);
-    var results = [];
-    for (var i = 0; i < 2; i++) {
-      results.push(parsedMatches.matches[i]);
-    }
+      var gameStats = [];
 
-    var gameStats = [];
+      for (var i = 0; i < results.length; i++) {
+        var added = 0;
+        (function(count) {
 
-    for (var i = 0; i < results.length; i++) {
-      var added = 0;
-      (function(count) {
+          var gameId = results[count].gameId;
+          var champId = Number(results[count].champion);
+          var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
 
-        var gameId = results[count].gameId;
-        var champId = Number(results[count].champion);
-        var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
+          request(matchUrl, function(error, response, body) {
+            var parsed = JSON.parse(body);
+            var players = parsed.participants;
+            var playerStats;
+            var stats = {};
 
-        request(matchUrl, function(error, response, body) {
-          var parsed = JSON.parse(body);
-          var players = parsed.participants;
-          var playerStats;
-          var stats = {};
-
-          var findPlayer = function(id) {
-            for (var i = 0; i < players.length; i++) {
-              if (players[i].championId === id) {
-                return players[i];
+            var findPlayer = function(id) {
+              for (var i = 0; i < players.length; i++) {
+                if (players[i].championId === id) {
+                  return players[i];
+                }
               }
             }
-          }
 
-          var player = findPlayer(champId)
+            var player = findPlayer(champId)
 
-          for (var i = 0; i < parsed.teams.length; i++) {
-            if (player.teamId === parsed.teams[i].teamId) {
-              stats.result = parsed.teams[i].win;
+            for (var i = 0; i < parsed.teams.length; i++) {
+              if (player.teamId === parsed.teams[i].teamId) {
+                stats.result = parsed.teams[i].win;
+              }
             }
-          }
 
-          stats.kills = player.stats.kills;
-          stats.deaths = player.stats.deaths;
-          stats.assists = player.stats.assists;
-          results[count].stats = stats;
-          added++;
-          if (added === results.length) {
-            res.send(results);
-          }
-        })
-      }(i));
-    }
-  });
+            stats.kills = player.stats.kills;
+            stats.deaths = player.stats.deaths;
+            stats.assists = player.stats.assists;
+            results[count].stats = stats;
+            added++;
+            if (added === results.length) {
+              searched[summonerName].gameStats = results;
+              console.log(searched[summonerName]);
+              res.send(results);
+            }
+          })
+        }(i));
+      }
+    });
+  }
 });
 
 app.get('/match', function(req, res) {
