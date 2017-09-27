@@ -3,7 +3,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      matchList: window.exampleMatchData.matches,
+      matchList: [],
       searchBar: 'ArkShepdog',
       accountInfo: {},
       soloQ: {},
@@ -38,9 +38,23 @@ class App extends React.Component {
   }
 
   searchMatches() {
-    this.setState({
-      matchesFound: true
-    });
+    var object = {
+      name: this.state.accountInfo.name,
+      endpoint: 'matches'
+    }
+
+    serverRequest(object, (err, data) => {
+      if (err) {
+        this.setState({
+          matchesFound: false,
+        });
+      } else {
+        this.setState({
+          matchesFound: true,
+          matchList: data.matches
+        });
+      }
+    })
   }
 
   hideMatches() {

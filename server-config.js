@@ -49,7 +49,13 @@ app.get('/summoner', function(req, res) {
 });
 
 app.get('/matches', function(req, res) {
+  var summonerName = req.query.name;
+  console.log(summonerName);
+  var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
 
+  request(matchesUrl, function(error, response, body) {
+    res.send(body);
+  });
 });
 
 module.exports = app;
