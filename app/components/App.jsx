@@ -4,7 +4,7 @@ class App extends React.Component {
 
     this.state = {
       matchList: [],
-      searchBar: 'ArkShepdog',
+      searchBar: '',
       accountInfo: {},
       soloQ: {},
       flexQ: {},
