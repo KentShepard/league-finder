@@ -50,7 +50,7 @@ class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-
+        <MatchList accountInfo={this.state.accountInfo} />
       </div>
     </div>
     )

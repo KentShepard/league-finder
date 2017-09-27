@@ -1,9 +1,17 @@
-var MatchList = ({matches}) => (
-  <div className="match-list">
-  {matches.map((match) =>
-    <MatchListEntry key={match.gameId} />
-  )}
-  </div>
-)
+var MatchList = ({accountInfo}) => {
+  if (accountInfo.name) {
+    return (
+      <div>
+        <span className="input-group-btn">
+          <button className="btn btn-default" type="button">View Match History</button>
+        </span>
+      </div>
+    )
+  } else {
+    return (
+      <div></div>
+    )
+  }
+};
 
 window.MatchList = MatchList;
