@@ -34,10 +34,8 @@ app.get('/summoner', function(req, res) {
                 searched[summonerName].flexQ = rankedQ;
               }
             })
-            console.log(searched[summonerName]);
             res.send(searched[summonerName]);
           } else {
-            console.log(searched[summonerName]);
             res.send(searched[summonerName]);
           }
         });
@@ -50,17 +48,25 @@ app.get('/summoner', function(req, res) {
 
 app.get('/matches', function(req, res) {
   var summonerName = req.query.name;
-  console.log(summonerName);
   var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
 
   request(matchesUrl, function(error, response, body) {
     var parsedMatches = JSON.parse(body);
-    console.log(parsedMatches)
     var results = [];
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 1; i++) {
       results.push(parsedMatches.matches[i]);
     }
     res.send(results);
+  });
+});
+
+app.get('/match', function(req, res) {
+  var accountId = req.query.accountId;
+  var gameId = req.query.gameId;
+  var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
+
+  request(matchUrl, function(error, response, body) {
+    res.send(body);
   });
 });
 

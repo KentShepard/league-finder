@@ -59,8 +59,28 @@ class App extends React.Component {
     })
   }
 
-  searchMatch() {
+  searchMatch(gameId) {
+    var object = {
+      accountId: this.state.accountInfo.accountId,
+      gameId: gameId,
+      endpoint: 'match'
+    }
 
+    serverRequest(object, (err, data) => {
+      if (err) {
+      } else {
+        console.log(data);
+      }
+    })
+  }
+
+  champFinder(champId) {
+    var obj = window.champions.data;
+    for (var key in obj) {
+      if (obj[key].id === champId) {
+        return obj[key].name;
+      }
+    }
   }
 
   hideMatches() {
@@ -83,7 +103,7 @@ class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
+        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch.bind(this)} hideMatches={this.hideMatches.bind(this)} champFinder={this.champFinder.bind(this)}accountInfo={this.state.accountInfo} />
       </div>
     </div>
     )

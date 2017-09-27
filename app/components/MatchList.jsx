@@ -1,4 +1,4 @@
-var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, accountInfo}) => {
+var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, champFinder, accountInfo}) => {
   if (matchesFound) {
     return(
       <div>
@@ -15,7 +15,13 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
               <th>K/D/A</th>
             </tr>
           </thead>
-          <MatchListEntry />
+          {matchList.map((match) => {
+            searchMatch(match.gameId)
+              return (
+                <MatchListEntry key={match.timestamp} champion={champFinder(match.champion)}/>
+              )
+            })
+          }
         </table>
       </div>
     )
