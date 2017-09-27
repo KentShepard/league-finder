@@ -37,7 +37,7 @@ class App extends React.Component {
     })
   }
 
-  searchMatches() {
+  searchMatchHistory() {
     var object = {
       name: this.state.accountInfo.name,
       endpoint: 'matches'
@@ -56,6 +56,8 @@ class App extends React.Component {
       }
     })
   }
+
+  searchMatch
 
   hideMatches() {
     this.setState({
@@ -77,7 +79,7 @@ class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatches={this.searchMatches.bind(this)} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
+        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} hideMatches={this.hideMatches.bind(this)} accountInfo={this.state.accountInfo} />
       </div>
     </div>
     )

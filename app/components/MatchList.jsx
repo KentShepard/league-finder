@@ -1,4 +1,4 @@
-var MatchList = ({matchesFound, searchMatches, hideMatches, accountInfo}) => {
+var MatchList = ({matchesFound, searchMatchHistory, hideMatches, accountInfo}) => {
   if (matchesFound) {
     return(
       <div>
@@ -8,6 +8,7 @@ var MatchList = ({matchesFound, searchMatches, hideMatches, accountInfo}) => {
         <table className="table table-striped table-hover ">
           <thead>
             <tr>
+              <th>Queue Type</th>
               <th>Win/Loss</th>
               <th>Champion Played</th>
               <th>K/D/A</th>
@@ -21,7 +22,7 @@ var MatchList = ({matchesFound, searchMatches, hideMatches, accountInfo}) => {
     return (
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-default" type="button" onClick={searchMatches}>View Match History</button>
+          <button className="btn btn-default" type="button" onClick={searchMatchHistory}>View Match History</button>
         </span>
       </div>
     )
