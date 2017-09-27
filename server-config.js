@@ -60,7 +60,7 @@ app.get('/matches', function(req, res) {
 
     var gameStats = [];
 
-    for (let i = 0; i < results.length; i++) {
+    for (var i = 0; i < results.length; i++) {
       var gameId = results[i].gameId;
       var champId = Number(results[i].champion);
       var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
