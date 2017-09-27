@@ -9,7 +9,8 @@ class App extends React.Component {
       soloQ: {},
       flexQ: {},
       summonerFound: true,
-      matchesFound: false
+      matchesFound: false,
+      gameStats: {}
     };
   }
 
@@ -59,10 +60,11 @@ class App extends React.Component {
     })
   }
 
-  searchMatch(gameId) {
+  searchMatch(gameId, champId) {
     var object = {
       accountId: this.state.accountInfo.accountId,
       gameId: gameId,
+      champId: champId,
       endpoint: 'match'
     }
 

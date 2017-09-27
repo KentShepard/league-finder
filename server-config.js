@@ -63,10 +63,36 @@ app.get('/matches', function(req, res) {
 app.get('/match', function(req, res) {
   var accountId = req.query.accountId;
   var gameId = req.query.gameId;
+  var champId = Number(req.query.champId);
   var matchUrl = `https://na1.api.riotgames.com/lol/match/v3/matches/${gameId}?api_key=${api_key}`
 
   request(matchUrl, function(error, response, body) {
-    res.send(body);
+    var parsed = JSON.parse(body);
+    var players = parsed.participants;
+    var playerStats;
+    var stats = {};
+
+    var findPlayer = function(id) {
+      for (var i = 0; i < players.length; i++) {
+        if (players[i].championId === id) {
+          return players[i];
+        }
+      }
+    }
+
+    var player = findPlayer(champId)
+
+    for (var i = 0; i < parsed.teams.length; i++) {
+      if (player.teamId === parsed.teams[i].teamId) {
+        stats.result = parsed.teams[i].win;
+      }
+    }
+
+    stats.kills = player.stats.kills;
+    stats.deaths = player.stats.deaths;
+    stats.assists = player.stats.assists;
+
+    res.send(stats);
   });
 });
 
