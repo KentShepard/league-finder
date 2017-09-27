@@ -12,13 +12,14 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
               <th>Win/Loss</th>
               <th>Champion Played</th>
               <th>Role</th>
+              <th>Lane</th>
               <th>K/D/A</th>
             </tr>
           </thead>
           {matchList.map((match) => {
             searchMatch(match.gameId)
               return (
-                <MatchListEntry key={match.timestamp} champion={champFinder(match.champion)}/>
+                <MatchListEntry key={match.timestamp} champion={champFinder(match.champion)} role={match.role} lane={match.lane.toLowerCase()}/>
               )
             })
           }

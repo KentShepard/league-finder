@@ -1,7 +1,7 @@
 var roles = {
   DUO_SUPPORT: 'Support',
   DUO_CARRY: 'ADC',
-  SOLO: 'Solo Laner',
+  SOLO: 'Solo',
   NONE: 'Jungler'
 }
 
