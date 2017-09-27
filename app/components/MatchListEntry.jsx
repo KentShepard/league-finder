@@ -1,7 +1,8 @@
-var MatchListEntry = ({champion, role, lane}) => (
+var MatchListEntry = ({date, queue, champion, role, lane}) => (
   <tbody>
     <tr>
-      <td>5v5 Ranked Solo</td>
+      <td>{date}</td>
+      <td>{window.queueTypes[queue]}</td>
       <td>Victory</td>
       <td>{champion}</td>
       <td>{window.roles[role]}</td>

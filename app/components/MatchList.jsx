@@ -8,6 +8,7 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
         <table className="table table-striped table-hover ">
           <thead>
             <tr>
+              <th>Date Played</th>
               <th>Queue Type</th>
               <th>Win/Loss</th>
               <th>Champion Played</th>
@@ -18,8 +19,9 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
           </thead>
           {matchList.map((match) => {
             searchMatch(match.gameId)
+            var date = new Date(match.timestamp).toUTCString().substring(0, 16);
               return (
-                <MatchListEntry key={match.timestamp} champion={champFinder(match.champion)} role={match.role} lane={match.lane.toLowerCase()}/>
+                <MatchListEntry key={match.timestamp} date={date} queue={match.queue} champion={champFinder(match.champion)} role={match.role} lane={match.lane.toLowerCase()}/>
               )
             })
           }

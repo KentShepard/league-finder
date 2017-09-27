@@ -53,7 +53,7 @@ app.get('/matches', function(req, res) {
   request(matchesUrl, function(error, response, body) {
     var parsedMatches = JSON.parse(body);
     var results = [];
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 1; i++) {
       results.push(parsedMatches.matches[i]);
     }
     res.send(results);
