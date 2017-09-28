@@ -12,7 +12,7 @@ var searched = {};
 app.use(express.static(__dirname + '/public'));
 
 app.get('/summoner', function(req, res) {
-  var summonerName = req.query.name;
+  var summonerName = req.query.name.toLowerCase();
   if (searched[summonerName]) {
     res.send(searched[summonerName])
   } else {
@@ -64,7 +64,7 @@ var matchRequest = function(match) {
 };
 
 app.get('/matches', function(req, res) {
-  var summonerName = req.query.name;
+  var summonerName = req.query.name.toLowerCase();
   var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${searched[summonerName].accountInfo.accountId}/recent?api_key=${api_key}`
   if (searched[summonerName].gameStats) {
     res.send(searched[summonerName].gameStats)
