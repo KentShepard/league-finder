@@ -1,6 +1,6 @@
 var serverRequest = ({name, accountId, gameId, champId, endpoint}, callback) => {
   $.ajax({
-    url: `http://127.0.0.1:3000/${endpoint}`,
+    url: `/${endpoint}`,
     data: {name: name,
       accountId: accountId,
       gameId: gameId,
