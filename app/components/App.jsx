@@ -103,7 +103,7 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
+    <div className="container">
       <div>
         <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>
       </div>
