@@ -95,11 +95,17 @@ class App extends React.Component {
     this.setState({searchBar: name});
   }
 
+  handleEnterKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.searchName();
+    }
+  }
+
   render() {
     return (
     <div>
       <div>
-        <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} />
+        <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>
       </div>
       <div>
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
