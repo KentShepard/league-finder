@@ -80,7 +80,7 @@ class App extends React.Component {
     var obj = window.champions.data;
     for (var key in obj) {
       if (obj[key].id === champId) {
-        return obj[key].name;
+        return obj[key].key;
       }
     }
   }
@@ -104,7 +104,7 @@ class App extends React.Component {
   render() {
     return (
     <div className="container">
-      <div>
+      <div className="container">
         <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>
       </div>
       <div>

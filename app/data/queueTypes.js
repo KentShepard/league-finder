@@ -22,7 +22,8 @@ var queueTypes = {
   850: 'Co-op vs. AI Beginner Bots',
   940: 'Nexus Siege',
   980: 'Star Guardian Invasion: Normal',
-  990: 'Star Guardian Invasion: Onslaught'
+  990: 'Star Guardian Invasion: Onslaught',
+  1000: 'Overcharge'
 }
 
 window.queueTypes = queueTypes;
