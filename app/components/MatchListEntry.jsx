@@ -3,7 +3,7 @@ import queueTypes from '../data/queueTypes.js';
 import roles from '../data/roles.js';
 
 var MatchListEntry = ({result, date, queue, champion, role, lane, kills, deaths, assists}) => (
-  <tbody>
+  <tbody className={result}>
     <tr>
       <td>{date}</td>
       <td>{queueTypes[queue]}</td>

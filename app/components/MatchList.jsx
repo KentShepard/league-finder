@@ -6,7 +6,7 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
     return(
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-default" type="button" onClick={hideMatches}>Hide Match History</button>
+          <button className="btn btn-outline-primary" type="button" onClick={hideMatches}>Hide Match History</button>
         </span>
         <table className="table table-striped table-hover ">
           <thead>
@@ -34,7 +34,7 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
     return (
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-default" type="button" onClick={searchMatchHistory}>View Match History</button>
+          <button className="btn btn-outline-primary" type="button" onClick={searchMatchHistory}>View Match History</button>
         </span>
       </div>
     )

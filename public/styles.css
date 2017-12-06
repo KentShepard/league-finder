@@ -1,4 +1,24 @@
+body {
+  background-color: #eaeaea;
+}
+
+tr {
+  text-align: center;
+}
+
+.search-bar {
+  margin: 5px;
+}
+
 .champion-image {
   width: 48px;
   height: 48px;
+}
+
+.Win {
+  background-color: #a3cfec
+}
+
+.Fail {
+  background-color: #e2b6b3;
 }
