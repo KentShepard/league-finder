@@ -6,4 +6,4 @@ var roles = {
   NONE: 'Jungler'
 }
 
-window.roles = roles;
+export default roles;
