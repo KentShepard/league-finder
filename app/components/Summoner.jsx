@@ -1,3 +1,5 @@
+import React from 'react';
+
 var Summoner = ({summonerFound, accountInfo, soloQ, flexQ}) => {
   if (summonerFound && accountInfo.name) {
     return (
@@ -35,4 +37,4 @@ var Summoner = ({summonerFound, accountInfo, soloQ, flexQ}) => {
   }
 };
 
-window.Summoner = Summoner;
+export default Summoner;

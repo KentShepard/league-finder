@@ -17,4 +17,4 @@ var serverRequest = ({name, accountId, gameId, champId, endpoint}, callback) => 
   })
 };
 
-window.serverRequest = serverRequest;
+export default serverRequest;

@@ -1,12 +1,8 @@
 ## NPM ##
 node_modules/
 
-## BOWER ##
-public/bower_components
-
 ## Compiled files ##
-compiled/
+bundle.js
 
 ## API keys ##
-app/config/riot.js
-compiled/config/riot.js
+riot.js

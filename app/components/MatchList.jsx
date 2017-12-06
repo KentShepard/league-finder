@@ -1,3 +1,6 @@
+import React from 'react';
+import MatchListEntry from './MatchListEntry.jsx';
+
 var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, champFinder, accountInfo}) => {
   if (matchesFound) {
     return(
@@ -42,4 +45,4 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
   }
 };
 
-window.MatchList = MatchList;
+export default MatchList;

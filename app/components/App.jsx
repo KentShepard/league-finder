@@ -1,4 +1,11 @@
-class App extends React.Component {
+import React from 'react';
+import Search from './Search.jsx';
+import Summoner from './Summoner.jsx';
+import MatchList from './MatchList.jsx';
+import serverRequest from '../lib/serverRequest.js';
+import champions from '../data/champions.js';
+
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -77,7 +84,7 @@ class App extends React.Component {
   }
 
   champFinder(champId) {
-    var obj = window.champions.data;
+    var obj = champions.data;
     for (var key in obj) {
       if (obj[key].id === champId) {
         return obj[key].key;
@@ -117,5 +124,3 @@ class App extends React.Component {
     )
   }
 }
-
-window.App = App;

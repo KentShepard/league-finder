@@ -1,3 +1,5 @@
+import React from 'react';
+
 var Search = ({searchBar, searchName, nameChange, handleEnterKeyPress}) => (
   <div className="search-bar form-inline row justify-content-md-center">
     <input className="form-control" type="text" onChange={(e) => nameChange(e.target.value)} placeholder="Summoner name..." value={searchBar} onKeyPress={handleEnterKeyPress}/>
@@ -5,4 +7,4 @@ var Search = ({searchBar, searchName, nameChange, handleEnterKeyPress}) => (
   </div>
 );
 
-window.Search = Search;
+export default Search;

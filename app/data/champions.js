@@ -833,4 +833,4 @@ var champions = {
     "version": "7.18.1"
 }
 
-window.champions = champions
+export default champions;
