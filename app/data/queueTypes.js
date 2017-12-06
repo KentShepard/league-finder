@@ -26,4 +26,4 @@ var queueTypes = {
   1000: 'Overcharge'
 }
 
-window.queueTypes = queueTypes;
+export default queueTypes;
