@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoUri = 'mongodb://localhost/league-finder';
 mongoose.connect(process.env.MONGODB_URI || mongoUri, {useMongoClient: true});
 
-const db = mongoose.connection;
+var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 

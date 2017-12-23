@@ -7,6 +7,7 @@ var request = require('request')
 
 var app = express();
 
+var Summoner = require('./db/summoner.js')
 var searched = {};
 
 app.use(express.static(__dirname + '/public'));

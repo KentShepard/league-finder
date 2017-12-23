@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const db = require('/config');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var db = require('./config');
+var Schema = mongoose.Schema;
 
 let summonerSchema = new Schema({
   username: {type: String, required: true},
