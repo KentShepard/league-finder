@@ -14,44 +14,48 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/summoner', function(req, res) {
   var summonerName = req.query.name.toLowerCase();
-  var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
-
-  request(summonerUrl, function(error, response, body) {
-    var parsedInfo = JSON.parse(body);
-    if (parsedInfo.name) {
-      searched[summonerName] = {};
-      searched[summonerName].accountInfo = parsedInfo;
-      searched[summonerName].name = parsedInfo.name;
-      var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
-
-      request(rankedUrl, function(error, response, body) {
-        var parsedRanked = JSON.parse(body);
-        if (parsedRanked.length) {
-          parsedRanked.forEach((rankedQ) => {
-            if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
-              searched[summonerName].soloQ = rankedQ;
-            } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
-              searched[summonerName].flexQ = rankedQ;
+  Summoner.findOne({name: summonerName}).then(summoner => {
+    if (summoner) {
+      res.send(summoner);
+    } else {
+      var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
+    
+      request(summonerUrl, function(error, response, body) {
+        var parsedInfo = JSON.parse(body);
+        if (parsedInfo.name) {
+          searched[summonerName] = {};
+          searched[summonerName].accountInfo = parsedInfo;
+          searched[summonerName].name = summonerName;
+          var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
+    
+          request(rankedUrl, function(error, response, body) {
+            var parsedRanked = JSON.parse(body);
+            if (parsedRanked.length) {
+              parsedRanked.forEach((rankedQ) => {
+                if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
+                  searched[summonerName].soloQ = rankedQ;
+                } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
+                  searched[summonerName].flexQ = rankedQ;
+                }
+              })
+              
+              findMatches(searched[summonerName].name, searched[summonerName].accountInfo.accountId, matchList => {
+                searched[summonerName].matchList = matchList;
+                Summoner.createOrUpdate({name: parsedInfo.name}, searched[summonerName]).then(data => {
+                  res.send(data);
+                }).catch(err => {
+                  console.log(err);
+                });
+              });
+              
             }
-          })
-          
-          findMatches(searched[summonerName].name, searched[summonerName].accountInfo.accountId, matchList => {
-            searched[summonerName].matchList = matchList;
-            Summoner.createOrUpdate({name: parsedInfo.name}, searched[summonerName]).then(data => {
-              res.send(data);
-            }).catch(err => {
-              console.log(err);
-            });
           });
-          
         } else {
-          res.send(searched[summonerName]);
+          res.status(400).send('Error finding summoner')
         }
       });
-    } else {
-      res.status(400).send('Error finding summoner')
     }
-  });
+  })
 });
 
 // var matchRequest = function(match) {
