@@ -23,7 +23,7 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
             </tr>
           </thead>
           {matchList.map((match) => {
-            var date = new Date(match.timestamp).toUTCString().substring(0, 16);
+            var date = moment(match.timestamp).format('MMMM Do YYYY');
               return (
                 <MatchListEntry key={match.timestamp} result={match.stats.result} date={date} queue={match.queue} champion={champFinder(match.champion)} role={match.role} lane={match.lane !== undefined ? match.lane.toLowerCase() : ''} kills={match.stats.kills} deaths={match.stats.deaths} assists={match.stats.assists}/>
               )
