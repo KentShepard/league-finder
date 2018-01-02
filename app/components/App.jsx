@@ -70,22 +70,6 @@ export default class App extends React.Component {
     })
   }
 
-  searchMatch(gameId, champId) {
-    var object = {
-      accountId: this.state.accountInfo.accountId,
-      gameId: gameId,
-      champId: champId,
-      endpoint: 'match'
-    }
-
-    serverRequest(object, (err, data) => {
-      if (err) {
-      } else {
-        console.log(data);
-      }
-    })
-  }
-
   champFinder(champId) {
     var obj = champions.data;
     for (var key in obj) {
@@ -93,12 +77,6 @@ export default class App extends React.Component {
         return obj[key].key;
       }
     }
-  }
-
-  hideMatches() {
-    this.setState({
-      matchesFound: false
-    });
   }
 
   nameChange(name) {
@@ -121,7 +99,7 @@ export default class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch.bind(this)} hideMatches={this.hideMatches.bind(this)} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
+        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
       </div>
     </div>
     )

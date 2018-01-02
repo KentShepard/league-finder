@@ -2,12 +2,12 @@ import React from 'react';
 import MatchListEntry from './MatchListEntry.jsx';
 import moment from 'moment';
 
-var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, champFinder, accountInfo, updatedAt}) => {
+var MatchList = ({matchesFound, searchMatchHistory, matchList, champFinder, accountInfo, updatedAt}) => {
   if (matchesFound) {
     return(
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-outline-primary" type="button" onClick={hideMatches}>Update Match History</button>
+          <button className="btn btn-outline-primary" type="button" onClick={console.log('click')}>Update Match History</button>
         </span>
         <span>Last updated: {moment(updatedAt).startOf('hour').fromNow()}</span>
         <table className="table table-striped table-hover ">
@@ -23,7 +23,7 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
             </tr>
           </thead>
           {matchList.map((match) => {
-            var date = moment(match.timestamp).format('MMMM Do YYYY');
+            var date = moment(match.timestamp).format('MMMM Do, YYYY');
               return (
                 <MatchListEntry key={match.timestamp} result={match.stats.result} date={date} queue={match.queue} champion={champFinder(match.champion)} role={match.role} lane={match.lane !== undefined ? match.lane.toLowerCase() : ''} kills={match.stats.kills} deaths={match.stats.deaths} assists={match.stats.assists}/>
               )
