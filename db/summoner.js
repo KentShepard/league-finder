@@ -7,7 +7,7 @@ let summonerSchema = new Schema({
   accountInfo: {type: Object, required: true},
   soloQ: Object,
   flexQ: Object,
-  matchHistory: Array,
+  matchList: Array,
 }, {timestamps: {createdAt: 'created_at'}});
 
 summonerSchema.plugin(require('mongoose-create-or-update'));

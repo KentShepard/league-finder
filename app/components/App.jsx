@@ -41,7 +41,8 @@ export default class App extends React.Component {
           soloQ: data.soloQ,
           flexQ: data.flexQ,
           searchBar: '',
-          matchesFound: false
+          matchesFound: true,
+          matchList: data.matchList
         });
       }
     })
