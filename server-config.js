@@ -14,38 +14,46 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/summoner', function(req, res) {
   var summonerName = req.query.name.toLowerCase();
-  if (searched[summonerName]) {
-    res.send(searched[summonerName])
-  } else {
-    var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
+  var summonerUrl = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${api_key}`
 
-    request(summonerUrl, function(error, response, body) {
-      var parsedInfo = JSON.parse(body);
-      if (parsedInfo.name) {
-        searched[summonerName] = {};
-        searched[summonerName].accountInfo = parsedInfo;
-        var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
+  request(summonerUrl, function(error, response, body) {
+    var parsedInfo = JSON.parse(body);
+    if (parsedInfo.name) {
+      searched[summonerName] = {};
+      searched[summonerName].accountInfo = parsedInfo;
+      searched[summonerName].name = parsedInfo.name;
+      console.log(parsedInfo.name);
+      var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
 
-        request(rankedUrl, function(error, response, body) {
-          var parsedRanked = JSON.parse(body);
-          if (parsedRanked.length) {
-            parsedRanked.forEach((rankedQ) => {
-              if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
-                searched[summonerName].soloQ = rankedQ;
-              } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
-                searched[summonerName].flexQ = rankedQ;
-              }
-            })
-            res.send(searched[summonerName]);
-          } else {
-            res.send(searched[summonerName]);
-          }
-        });
-      } else {
-        res.status(400).send('Error finding summoner')
-      }
-    });
-  }
+      request(rankedUrl, function(error, response, body) {
+        var parsedRanked = JSON.parse(body);
+        if (parsedRanked.length) {
+          parsedRanked.forEach((rankedQ) => {
+            if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
+              searched[summonerName].soloQ = rankedQ;
+            } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
+              searched[summonerName].flexQ = rankedQ;
+            }
+          })
+          Summoner.createOrUpdate({name: parsedInfo.name}, searched[summonerName]).then(data => {
+            console.log(data);
+            res.send(data);
+          }).catch(err => {
+            console.log(err);
+          });
+
+          // Summoner.create(searched[summonerName], function (err, small) {
+          //   if (err) console.log(err);
+          //   res.send(searched[summonerName]);
+          // })
+        } else {
+          res.send(searched[summonerName]);
+        }
+      });
+    } else {
+      res.status(400).send('Error finding summoner')
+    }
+  });
 });
 
 var matchRequest = function(match) {
