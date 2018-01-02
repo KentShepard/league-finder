@@ -36,10 +36,8 @@ app.get('/summoner', function(req, res) {
           })
           
           findMatches(searched[summonerName].name, searched[summonerName].accountInfo.accountId, matchList => {
-            console.log(matchList);
             searched[summonerName].matchList = matchList;
             Summoner.createOrUpdate({name: parsedInfo.name}, searched[summonerName]).then(data => {
-              console.log(data);
               res.send(data);
             }).catch(err => {
               console.log(err);

@@ -1,6 +1,9 @@
 import React from 'react';
 
 var Summoner = ({summonerFound, accountInfo, soloQ, flexQ}) => {
+  var round = function round(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+  }
   if (summonerFound && accountInfo.name) {
     return (
       <table className="table table-striped table-hover ">
@@ -19,9 +22,9 @@ var Summoner = ({summonerFound, accountInfo, soloQ, flexQ}) => {
             <td>{accountInfo.name}</td>
             <td>{accountInfo.summonerLevel}</td>
             <td>{soloQ !== undefined ? `${soloQ.tier} ${soloQ.rank}` : 'Unranked'}</td>
-            <td>{soloQ !== undefined ? `${soloQ.wins}-${soloQ.losses} (${(soloQ.wins / (soloQ.wins + soloQ.losses)).toFixed(4) * 100}%)` : 'Unranked'}</td>
+            <td>{soloQ !== undefined ? `${soloQ.wins}-${soloQ.losses} (${round((soloQ.wins / (soloQ.wins + soloQ.losses) * 100), 2)}%)` : 'Unranked'}</td>
             <td>{flexQ !== undefined ? `${flexQ.tier} ${flexQ.rank}` : 'Unranked'}</td>
-            <td>{flexQ !== undefined ? `${flexQ.wins}-${flexQ.losses} (${(flexQ.wins / (flexQ.wins + flexQ.losses)).toFixed(4) * 100}%)` : 'Unranked'}</td>
+            <td>{flexQ !== undefined ? `${flexQ.wins}-${flexQ.losses} (${round((flexQ.wins / (flexQ.wins + flexQ.losses) * 100), 2)}%)` : 'Unranked'}</td>
           </tr>
         </tbody>
       </table>

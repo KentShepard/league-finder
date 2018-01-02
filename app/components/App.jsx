@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
     this.state = {
       matchList: [],
-      searchBar: 'Wildturtle',
+      searchBar: 'ShepGG',
       accountInfo: {},
       soloQ: {},
       flexQ: {},
