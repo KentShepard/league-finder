@@ -8,7 +8,6 @@ var request = require('request')
 var app = express();
 
 var Summoner = require('./db/summoner.js')
-var searched = {};
 
 app.use(express.static(__dirname + '/public'));
 
@@ -23,9 +22,9 @@ app.get('/summoner', function(req, res) {
       request(summonerUrl, function(error, response, body) {
         var parsedInfo = JSON.parse(body);
         if (parsedInfo.name) {
-          searched[summonerName] = {};
-          searched[summonerName].accountInfo = parsedInfo;
-          searched[summonerName].name = summonerName;
+          searchedSummoner = {};
+          searchedSummoner.accountInfo = parsedInfo;
+          searchedSummoner.name = summonerName;
           var rankedUrl = `https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/${parsedInfo.id}?api_key=${api_key}`
     
           request(rankedUrl, function(error, response, body) {
@@ -33,15 +32,15 @@ app.get('/summoner', function(req, res) {
             if (parsedRanked.length) {
               parsedRanked.forEach((rankedQ) => {
                 if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
-                  searched[summonerName].soloQ = rankedQ;
+                  searchedSummoner.soloQ = rankedQ;
                 } else if (rankedQ.queueType === 'RANKED_FLEX_SR') {
-                  searched[summonerName].flexQ = rankedQ;
+                  searchedSummoner.flexQ = rankedQ;
                 }
               })
               
-              findMatches(searched[summonerName].name, searched[summonerName].accountInfo.accountId, matchList => {
-                searched[summonerName].matchList = matchList;
-                Summoner.createOrUpdate({name: parsedInfo.name}, searched[summonerName]).then(data => {
+              findMatches(searchedSummoner.name, searchedSummoner.accountInfo.accountId, matchList => {
+                searchedSummoner.matchList = matchList;
+                Summoner.createOrUpdate({name: parsedInfo.name}, searchedSummoner).then(data => {
                   res.send(data);
                 }).catch(err => {
                   console.log(err);
@@ -58,6 +57,14 @@ app.get('/summoner', function(req, res) {
   })
 });
 
+app.get('/matches', function(req, res) {
+  var summonerName = req.query.name.toLowerCase();
+  findMatches(summonerName, req.query.accountId, matchList => {
+    console.log(matchList);
+    Summoner.findOneAndUpdate({name: summonerName}, {matchList: matchList}, {new: true}).then(summoner => {console.log(summoner); res.send(summoner)})
+    .catch(err => res.send('Error updating match history'));
+  })
+});
 // var matchRequest = function(match) {
 //   return new Promise(function(resolve, reject) {
 //     var gameId = match.gameId;
@@ -120,7 +127,6 @@ var findMatches = function(name, accountId, callback) {
             results[count].stats = stats;
             added++;
             if (added === results.length) {
-              searched[summonerName].gameStats = results;
               callback(results);
             }
           })

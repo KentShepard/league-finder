@@ -50,9 +50,10 @@ export default class App extends React.Component {
     })
   }
 
-  searchMatchHistory() {
+  updateMatchHistory() {
     var object = {
       name: this.state.accountInfo.name,
+      accountId: this.state.accountInfo.accountId,
       endpoint: 'matches'
     }
 
@@ -62,9 +63,11 @@ export default class App extends React.Component {
           matchesFound: false,
         });
       } else {
+        console.log(data);
         this.setState({
           matchesFound: true,
-          matchList: data
+          matchList: data.matchList,
+          updatedAt: data.updatedAt
         });
       }
     })
@@ -99,7 +102,7 @@ export default class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
+        <MatchList matchesFound={this.state.matchesFound} updateMatchHistory={this.updateMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
       </div>
     </div>
     )
