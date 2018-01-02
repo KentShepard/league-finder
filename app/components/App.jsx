@@ -16,7 +16,8 @@ export default class App extends React.Component {
       soloQ: {},
       flexQ: {},
       summonerFound: true,
-      matchesFound: false
+      matchesFound: false,
+      updatedAt: null
     };
   }
 
@@ -42,7 +43,8 @@ export default class App extends React.Component {
           flexQ: data.flexQ,
           searchBar: '',
           matchesFound: true,
-          matchList: data.matchList
+          matchList: data.matchList,
+          updatedAt: data.updatedAt
         });
       }
     })
@@ -119,7 +121,7 @@ export default class App extends React.Component {
         <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
       </div>
       <div>
-        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch.bind(this)} hideMatches={this.hideMatches.bind(this)} champFinder={this.champFinder.bind(this)}accountInfo={this.state.accountInfo} />
+        <MatchList matchesFound={this.state.matchesFound} searchMatchHistory={this.searchMatchHistory.bind(this)} matchList={this.state.matchList} searchMatch={this.searchMatch.bind(this)} hideMatches={this.hideMatches.bind(this)} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
       </div>
     </div>
     )

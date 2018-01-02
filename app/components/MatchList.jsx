@@ -1,13 +1,15 @@
 import React from 'react';
 import MatchListEntry from './MatchListEntry.jsx';
+import moment from 'moment';
 
-var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, champFinder, accountInfo}) => {
+var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hideMatches, champFinder, accountInfo, updatedAt}) => {
   if (matchesFound) {
     return(
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-outline-primary" type="button" onClick={hideMatches}>Hide Match History</button>
+          <button className="btn btn-outline-primary" type="button" onClick={hideMatches}>Update Match History</button>
         </span>
+        <span>Last updated: {moment(updatedAt).startOf('hour').fromNow()}</span>
         <table className="table table-striped table-hover ">
           <thead>
             <tr>
@@ -28,14 +30,6 @@ var MatchList = ({matchesFound, searchMatchHistory, matchList, searchMatch, hide
             })
           }
         </table>
-      </div>
-    )
-  } else if (accountInfo.name) {
-    return (
-      <div>
-        <span className="input-group-btn">
-          <button className="btn btn-outline-primary" type="button" onClick={searchMatchHistory}>View Match History</button>
-        </span>
       </div>
     )
   } else {

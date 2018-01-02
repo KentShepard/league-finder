@@ -17,6 +17,7 @@
     "bootstrap": "^4.0.0-alpha.2",
     "express": "^4.13.4",
     "jquery": "^2.2.1",
+    "moment": "^2.20.1",
     "mongoose": "^4.13.7",
     "mongoose-create-or-update": "^1.0.3",
     "parcel-bundler": "^1.0.2",
