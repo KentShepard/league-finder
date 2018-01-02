@@ -60,7 +60,6 @@ app.get('/summoner', function(req, res) {
 app.get('/matches', function(req, res) {
   var summonerName = req.query.name.toLowerCase();
   findMatches(summonerName, req.query.accountId, matchList => {
-    console.log(matchList);
     Summoner.findOneAndUpdate({name: summonerName}, {matchList: matchList}, {new: true}).then(summoner => {console.log(summoner); res.send(summoner)})
     .catch(err => res.send('Error updating match history'));
   })

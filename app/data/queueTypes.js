@@ -23,7 +23,8 @@ var queueTypes = {
   940: 'Nexus Siege',
   980: 'Star Guardian Invasion: Normal',
   990: 'Star Guardian Invasion: Onslaught',
-  1000: 'Overcharge'
+  1000: 'Overcharge',
+  1010: 'Snow ARURF'
 }
 
 export default queueTypes;

@@ -19,6 +19,8 @@ export default class App extends React.Component {
       matchesFound: false,
       updatedAt: null
     };
+
+    setInterval(this.updateLastUpdated.bind(this), 30000);
   }
 
   searchName() {
@@ -71,6 +73,12 @@ export default class App extends React.Component {
         });
       }
     })
+  }
+
+  updateLastUpdated() {
+    this.setState({
+      updatedAt: this.state.updatedAt
+    });
   }
 
   champFinder(champId) {
