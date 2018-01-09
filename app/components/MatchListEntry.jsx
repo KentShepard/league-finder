@@ -9,7 +9,7 @@ var MatchListEntry = ({result, date, queue, champion, role, lane, kills, deaths,
       <td>{queueTypes[queue]}</td>
       <td>{result === 'Win' ? 'Victory' : 'Defeat'}</td>
       <td>
-        <img src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${champion}.png`} alt="" className="champion-image"/>
+        <img src={`http://ddragon.leagueoflegends.com/cdn/7.24.1/img/champion/${champion}.png`} alt="" className="champion-image"/>
         <div>{champion}</div>
       </td>
       <td>{roles[role]}</td>

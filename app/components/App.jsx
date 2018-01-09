@@ -107,7 +107,7 @@ export default class App extends React.Component {
       <div className="container">
         <Router>
           <div>
-            <Route path="/" render={props => (<Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>)}/>
+            <Route path="/" render={props => (<Search {...props} searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>)}/>
             <Route path="/summoner/:name" render={props => (<Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />)}/>
             <Route path="/summoner/:name" render={props => (<MatchList matchesFound={this.state.matchesFound} updateMatchHistory={this.updateMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt} />)}/>
           </div>
