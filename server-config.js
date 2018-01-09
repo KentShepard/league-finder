@@ -9,7 +9,7 @@ var app = express();
 
 var Summoner = require('./db/summoner.js')
 
-app.use(express.static(__dirname + '/public'));
+app.use('/summoner/:name', express.static(__dirname + '/public'));
 
 app.get('/summoner', function(req, res) {
   var summonerName = req.query.name.toLowerCase();

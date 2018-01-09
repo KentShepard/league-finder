@@ -5,6 +5,8 @@ import MatchList from './MatchList.jsx';
 import serverRequest from '../lib/serverRequest.js';
 import champions from '../data/champions.js';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -91,7 +93,7 @@ export default class App extends React.Component {
   }
 
   nameChange(name) {
-    this.setState({searchBar: name});
+    this.setState({ searchBar: name });
   }
 
   handleEnterKeyPress(e) {
@@ -102,17 +104,15 @@ export default class App extends React.Component {
 
   render() {
     return (
-    <div className="container">
       <div className="container">
-        <Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>
+        <Router>
+          <div>
+            <Route path="/" render={props => (<Search searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} handleEnterKeyPress={this.handleEnterKeyPress.bind(this)}/>)}/>
+            <Route path="/summoner/:name" render={props => (<Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />)}/>
+            <Route path="/summoner/:name" render={props => (<MatchList matchesFound={this.state.matchesFound} updateMatchHistory={this.updateMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt} />)}/>
+          </div>
+        </Router>
       </div>
-      <div>
-        <Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />
-      </div>
-      <div>
-        <MatchList matchesFound={this.state.matchesFound} updateMatchHistory={this.updateMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt}/>
-      </div>
-    </div>
     )
   }
 }
