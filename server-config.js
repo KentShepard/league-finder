@@ -66,7 +66,8 @@ var findProfile = function (summonerName, callback) {
 
           findMatches(searchedSummoner.name, searchedSummoner.accountInfo.accountId, matchList => {
             searchedSummoner.matchList = matchList;
-            Summoner.createOrUpdate({ name: parsedInfo.name }, searchedSummoner).then(data => {
+            console.log(searchedSummoner);
+            Summoner.createOrUpdate({ name: summonerName }, searchedSummoner).then(data => {
               callback(data);
             }).catch(err => {
               console.log(err);
