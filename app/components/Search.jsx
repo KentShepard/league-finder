@@ -8,7 +8,10 @@ export default class Search extends React.Component {
 
   componentWillMount() {
     let summonerName = this.props.location.pathname.split('/')[2];
-    this.props.searchName(summonerName);
+
+    if (summonerName) {
+      this.props.searchName(summonerName);
+    }
   }
 
   handleEnterKeyPress(e) {

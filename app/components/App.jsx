@@ -26,6 +26,7 @@ export default class App extends React.Component {
   }
 
   searchName(summonerName) {
+    summonerName = typeof summonerName === 'string' ? summonerName : undefined;
     var object = {
       name: summonerName || this.state.searchBar,
       endpoint: 'summoner'

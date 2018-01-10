@@ -9,6 +9,7 @@ var app = express();
 
 var Summoner = require('./db/summoner.js')
 
+app.use(express.static(__dirname + '/public'));
 app.use('/summoner/:name', express.static(__dirname + '/public'));
 
 app.get('/summoner', function (req, res) {
@@ -39,10 +40,6 @@ app.get('/update', function (req, res) {
       res.send(profile);
     }
   });
-  // findMatches(summonerName, req.query.accountId, matchList => {
-  //   Summoner.findOneAndUpdate({ name: summonerName }, { matchList: matchList }, { new: true }).then(summoner => { res.send(summoner) })
-  //     .catch(err => res.send('Error updating match history'));
-  // })
 });
 
 var findProfile = function (summonerName, callback) {
