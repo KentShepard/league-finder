@@ -54,11 +54,11 @@ export default class App extends React.Component {
     })
   }
 
-  updateMatchHistory() {
+  updateProfile() {
     var object = {
       name: this.state.accountInfo.name,
       accountId: this.state.accountInfo.accountId,
-      endpoint: 'matches'
+      endpoint: 'update'
     }
 
     serverRequest(object, (err, data) => {
@@ -67,7 +67,6 @@ export default class App extends React.Component {
           matchesFound: false,
         });
       } else {
-        console.log(data);
         this.setState({
           matchesFound: true,
           matchList: data.matchList,
@@ -103,7 +102,7 @@ export default class App extends React.Component {
           <div>
             <Route path="/" render={props => (<Search {...props} searchBar={this.state.searchBar} searchName={this.searchName.bind(this)} nameChange={this.nameChange.bind(this)} accountInfo={this.state.accountInfo}/>)}/>
             <Route path="/summoner/:name" render={props => (<Summoner summonerFound={this.state.summonerFound} accountInfo={this.state.accountInfo} soloQ={this.state.soloQ} flexQ={this.state.flexQ} />)}/>
-            <Route path="/summoner/:name" render={props => (<MatchList matchesFound={this.state.matchesFound} updateMatchHistory={this.updateMatchHistory.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt} />)}/>
+            <Route path="/summoner/:name" render={props => (<MatchList matchesFound={this.state.matchesFound} updateProfile={this.updateProfile.bind(this)} matchList={this.state.matchList} champFinder={this.champFinder.bind(this)} accountInfo={this.state.accountInfo} updatedAt={this.state.updatedAt} />)}/>
           </div>
         </Router>
       </div>

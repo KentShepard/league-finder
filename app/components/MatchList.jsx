@@ -2,12 +2,12 @@ import React from 'react';
 import MatchListEntry from './MatchListEntry.jsx';
 import moment from 'moment';
 
-var MatchList = ({matchesFound, updateMatchHistory, matchList, champFinder, accountInfo, updatedAt}) => {
+var MatchList = ({matchesFound, updateProfile, matchList, champFinder, accountInfo, updatedAt}) => {
   if (matchesFound) {
     return(
       <div>
         <span className="input-group-btn">
-          <button className="btn btn-outline-primary" type="button" onClick={updateMatchHistory}>Update Match History</button>
+          <button className="btn btn-outline-primary" type="button" onClick={updateProfile}>Update Match History</button>
         </span>
         <span>Last updated: {moment(updatedAt).fromNow()}</span>
         <table className="table table-striped table-hover ">
