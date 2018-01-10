@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default class Search extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);  
+  }
+
+  componentWillMount() {
+    let summonerName = this.props.location.pathname.split('/')[2];
+    this.props.searchName(summonerName);
   }
 
   handleEnterKeyPress(e) {

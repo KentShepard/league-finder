@@ -25,9 +25,9 @@ export default class App extends React.Component {
     setInterval(this.updateLastUpdated.bind(this), 30000);
   }
 
-  searchName() {
+  searchName(summonerName) {
     var object = {
-      name: this.state.searchBar,
+      name: summonerName || this.state.searchBar,
       endpoint: 'summoner'
     }
 
