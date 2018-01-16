@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
     this.state = {
       matchList: [],
-      searchBar: 'ShepGG',
+      searchBar: '',
       accountInfo: {},
       soloQ: {},
       flexQ: {},
