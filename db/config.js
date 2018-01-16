@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoUri = 'mongodb://localhost/league-finder';
+mongoUri = 'mongodb://localhost/summoner-search';
 mongoose.connect(process.env.MONGODB_URI || mongoUri, {useMongoClient: true});
 
 var db = mongoose.connection;

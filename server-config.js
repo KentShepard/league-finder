@@ -2,7 +2,7 @@ var express = require('express');
 // var fs = require('fs');
 // var Promise = require('bluebird');
 // var readFile = Promise.promisify(fs.readFile);
-var api_key = require('./app/config/riot');
+var api_key = process.env.api_key || require('./app/config/riot');
 var request = require('request')
 
 var app = express();
