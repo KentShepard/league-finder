@@ -32,7 +32,6 @@ app.get('/summoner', function (req, res) {
 
 app.get('/update', function (req, res) {
   var summonerName = req.query.name.toLowerCase();
-  console.log(summonerName);
   findProfile(summonerName, (profile, err) => {
     if (err) {
       console.log(err);
@@ -48,7 +47,6 @@ var findProfile = function (summonerName, callback) {
 
   request(summonerUrl, function (error, response, body) {
     var parsedInfo = JSON.parse(body);
-    console.log(parsedInfo);
     if (parsedInfo.name) {
       searchedSummoner = {};
       searchedSummoner.accountInfo = parsedInfo;
@@ -57,7 +55,6 @@ var findProfile = function (summonerName, callback) {
 
       request(rankedUrl, function (error, response, body) {
         var parsedRanked = JSON.parse(body);
-        console.log(parsedRanked);
         if (parsedRanked.length) {
           parsedRanked.forEach((rankedQ) => {
             if (rankedQ.queueType === 'RANKED_SOLO_5x5') {
