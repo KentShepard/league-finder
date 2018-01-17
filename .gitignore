@@ -5,4 +5,4 @@ node_modules/
 bundle.js
 
 ## API keys ##
-config/
+riot.js
