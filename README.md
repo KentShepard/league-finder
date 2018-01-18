@@ -4,7 +4,9 @@
 
 Search League of Legend accounts using Riot Games' API.
 
-## Requirements
+## Development
+
+### Requirements
 
 - Node package manager
 - Node v6+
@@ -12,13 +14,13 @@ Search League of Legend accounts using Riot Games' API.
 - Riot Games' API Key
 - see package.json for dependencies
 
-## API Key
+### API Key
 Go to https://developer.riotgames.com/ to receive your API Key and store it in a file named `riot.js` on the root directory with the following format:
 ```javascript
 module.exports = 'RGAPI-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX';
 ```
 
-## Development
+### Installing Dependincies
 
 You must have MongoDB running as a service or in it's own terminal.
 
