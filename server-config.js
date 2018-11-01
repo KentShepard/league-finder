@@ -81,7 +81,7 @@ var findProfile = function (summonerName, callback) {
 
 var findMatches = function (name, accountId, callback) {
   var summonerName = name.toLowerCase();
-  var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${accountId}/recent?api_key=${api_key}`;
+  var matchesUrl = `https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${accountId}?api_key=${api_key}`;
   request(matchesUrl, function (error, response, body) {
     var parsedMatches = JSON.parse(body);
     var results = [];

@@ -2,7 +2,7 @@ import React from 'react';
 import MatchListEntry from './MatchListEntry.jsx';
 import moment from 'moment';
 
-var MatchList = ({matchesFound, updateProfile, matchList, champFinder, accountInfo, updatedAt}) => {
+var MatchList = ({matchesFound, updateProfile, matchList, champFinder, updatedAt}) => {
   if (matchesFound) {
     return(
       <div>
